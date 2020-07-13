@@ -1,12 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { Provider } from 'react-redux';
+import { HashRouter as Router, Route } from 'react-router-dom';
+
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import store from './store';
 
+// styles
+import 'bootstrap/dist/css/bootstrap.css';
+import './DemoStyles.css';
+import './index.css';
+import StateTest from './components/stateTest';
+import Login from './components/stateTest/stateLogin';
+
+// code inspired from: https://thinkster.io/tutorials/build-a-real-world-react-redux-application
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <Router>
+        <Route path="/" component={App}></Route>
+        <Route exact path="/" component={StateTest}></Route>
+        <Route path="/login" component={Login} />
+      </Router>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
