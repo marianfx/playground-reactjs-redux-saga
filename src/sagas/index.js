@@ -1,4 +1,4 @@
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { call, put, takeEvery, takeLatest, all } from 'redux-saga/effects';
 import apiAgent from '../api/agent';
 import { actionTypes } from '../actions/actionTypes';
 
@@ -24,4 +24,10 @@ function* articleSaga() {
     yield takeLatest(actionTypes.SAGATEST_REQUEST, fetchArticle);
 }
 
-export default articleSaga;
+function* allSagas() {
+    yield all([
+        articleSaga()
+    ])
+}
+
+export default allSagas;
