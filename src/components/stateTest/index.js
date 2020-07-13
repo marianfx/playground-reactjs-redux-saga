@@ -28,10 +28,15 @@ class StateTest extends React.Component {
         store.dispatch({ type: actionTypes.APP_TOGGLE });
     }
 
+    onLoadArticleClick = () => {
+        store.dispatch({ type: actionTypes.SAGATEST_REQUEST, payload: { articleId: 1 }})
+    }
+
     render() {
         return (
             <div>
                 <StateHeader appName={this.props.appName}></StateHeader>
+                <button className="btn btn-primary" onClick={this.onLoadArticleClick}>Load article!</button>
                 <button className="btn btn-primary" onClick={this.onStateChangeClick}>Change!</button>
                 <div className="form-group">
                     <label htmlFor="checked-input">Is checked?</label>
@@ -43,7 +48,11 @@ class StateTest extends React.Component {
 
                         <div className="col-md-3">
                             <div className="sidebar">
-                                <p>Popular tags</p>
+                                <p>Popular tags / loaded article</p>
+                                {this.props.article 
+                                    ? <p>{JSON.stringify(this.props.article)}</p>
+                                    : <p>No article loaded...yet</p>
+                                }   
                             </div>
                         </div>
                     </div>
@@ -58,7 +67,8 @@ StateTest.propTypes = {
 }
 
 const mapStateToProps = state => ({
-    appName: state.appName
+    appName: state.appName,
+    article: state.article
 });
 
 const mapDispatchToProps = (dispatch) => ({

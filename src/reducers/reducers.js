@@ -3,7 +3,8 @@ const { actionTypes } = require("../actions/actionTypes");
 const defaultState = { 
     checked: false,
     appName: 'Tester boy',
-    articles: null
+    articles: null,
+    article: null
 };
 
 const appReducer = function(state = defaultState, action) {
@@ -17,6 +18,18 @@ const appReducer = function(state = defaultState, action) {
             return {
                 ...state,
                 articles: action.payload.articles
+            }
+        case actionTypes.SAGATEST_REQUEST_SUCCEEDED:
+            console.log("taking article", action);
+            return {
+                ...state,
+                article: action.payload.article
+            }
+        case actionTypes.SAGATEST_REQUEST:
+        case actionTypes.SAGATEST_REQUEST_FAILED:
+            return {
+                ...state,
+                article: null
             }
         default:
             return state;

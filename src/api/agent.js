@@ -8,7 +8,8 @@ const requests = {
 }
 
 const Articles = {
-    all: page => requests.get('/articles?limit=10')
+    all: page => requests.get('/articles?limit=10'),
+    one: id => requests.get('/articles/' + id)
 }
 
 const apiAgent = { 
